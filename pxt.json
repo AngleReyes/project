@@ -1,5 +1,5 @@
 {
-    "name": "yay",
+    "name": "cafe :>",
     "description": "",
     "dependencies": {
         "device": "*"
@@ -8,7 +8,11 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "assets.json"
+        "assets.json",
+        "tilemap.g.jres",
+        "tilemap.g.ts",
+        "images.g.jres",
+        "images.g.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -20,5 +24,23 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "blocksprj",
+    "palette": [
+        "#000000",
+        "#FBF2C0",
+        "#48392A",
+        "#43281C",
+        "#C06E52",
+        "#001219",
+        "#005F73",
+        "#0A9396",
+        "#94D2BD",
+        "#E9D8A6",
+        "#EE9B00",
+        "#CA6702",
+        "#BB3E03",
+        "#E7BC91",
+        "#F3D5B5",
+        "#000000"
+    ]
 }

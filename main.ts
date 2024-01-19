@@ -141,3 +141,5 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
+let Fridge = sprites.create(assets.image`fridge`, SpriteKind.Player)
+tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))

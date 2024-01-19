@@ -58,6 +58,12 @@
         "tilemapTile": true,
         "displayName": "myTile7"
     },
+    "tile10": {
+        "data": "hwQQABAAAADd3d09MzMzM+7u7j4zMzMz7u7uPjMzMzPu7u4+MzMzM+7u7j4zMzMz3e7dPjMzMzPu7e4+MzMzM+7u7j4zMzMz7u7uPjMzMzPu7u4+MzMzM93d3j4zMzMz7u7tPTMzMzPu7u4+MzMzM+7u7j4zMzMz7u7uPjMzMzPd3d09MzMzMw==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile8"
+    },
     "level2": {
         "id": "level2",
         "mimeType": "application/mkcd-tilemap",
@@ -70,7 +76,7 @@
     "level1": {
         "id": "level1",
         "mimeType": "application/mkcd-tilemap",
-        "data": "MTAwZjAwMGMwMDAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwNDA0MDQwNDA0MDcwNDA0MDQwNDA0MDMwMzAzMDMwNTA1MDUwNTA1MDYwNTA1MDUwNTA1MDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAxMDIwMTAyMDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDIwMTAyMDEwMjAxMDIwMTAyMDEwMjAxMDIwMTA4MDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwOTA4MDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwOTA4MDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDgwODA4MDEwMjAxMDIwMTAyMDEwMjAyMDIwMTIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMjAwMDAyMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAyMjAyMDAwMDAwMDAwMA==",
+        "data": "MTAwZjAwMGMwMDAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwNDA0MDQwNDA0MDcwNDA0MDQwNDA0MDMwMzAzMDMwNTA1MDUwNTA1MDYwNTA1MDUwNTA1MDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAzMDMwMzAxMDIwMTAyMDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDIwMTAyMDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwOTA4MDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwOTA4MDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwMTA4MDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwMTAxMDIwMTA4MDEwMjAxMDIwMTAyMDEwMjAxMDIwMTBhMGEwYTA4MDEwMjAxMDIwMTAyMDEwMjAyMDIwMTIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMjAwMDAyMDAwMDAwMDAwMDAyMjAwMDAwMDAwMDAwMjAwMDAyMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMjAyMjAyMDAwMDAwMDAwMA==",
         "tileset": [
             "myTiles.transparency16",
             "myTiles.tile2",
@@ -81,7 +87,8 @@
             "myTiles.tile3",
             "myTiles.tile5",
             "myTiles.tile8",
-            "myTiles.tile9"
+            "myTiles.tile9",
+            "myTiles.tile10"
         ],
         "displayName": "Cafe"
     },

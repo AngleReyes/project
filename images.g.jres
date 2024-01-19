@@ -9,6 +9,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "fridge"
     },
+    "image3": {
+        "data": "hwQQACAAAAAAgIiIiIiIiIiIiIiIiIiIAIAREREREREREREREePujgCAERERERERERERERHj7o4AgBERERERERERERER4+6OAIAREREREREREREREePujgAAODMzMzMzMzMzMzPj7o4AAIARERERMRERERER4+6OAAAAGBERHjER4RERETHujgAAABgREeERExEeEREx7o4AAACAERHhERMRHhEREeOOAAAAABgRER4xEeERERHjjgAAAACAERERMRERERERMY4AAAAAADgzMzMzMzMzMzOOAAAAAAAYERHu7u4RERERgwAAAAAAgBEREREREREREYMAAAAAAACIiIiIiIiIiIiI",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "fridgeh"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

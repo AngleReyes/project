@@ -56,7 +56,7 @@ namespace myTiles {
 2 . . 2 . . . . . . . . . . . 
 2 . . 2 . . . . . . . . . . . 
 2 . . 2 . . . . . . . . . . . 
-. . . 2 . . . . . . . . . . . 
+2 . . 2 . . . . . . . . . . . 
 2 2 2 2 . . . . . . . . . . . 
 `, [myTiles.transparency16,myTiles.tile2,myTiles.tile4,myTiles.tile1,myTiles.tile6,myTiles.tile7,myTiles.tile3,myTiles.tile5,myTiles.tile8,myTiles.tile9,myTiles.tile10], TileScale.Sixteen);
         }

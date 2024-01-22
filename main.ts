@@ -1,8 +1,3 @@
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Fridge.x <= mySprite.x && Fridge.y <= mySprite.y) {
-        Fridge.setImage(assets.image`fridgeh`)
-    }
-})
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -79,7 +74,6 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-let Fridge: Sprite = null
 let mySprite: Sprite = null
 tiles.setCurrentTilemap(tilemap`Cafe`)
 scene.setBackgroundImage(img`
@@ -224,5 +218,12 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
-Fridge = sprites.create(assets.image`fridge`, SpriteKind.Player)
+let Fridge = sprites.create(assets.image`fridge`, SpriteKind.Player)
 tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
+game.onUpdate(function () {
+    if (Fridge.x <= mySprite.x && Fridge.y <= mySprite.y) {
+        Fridge.setImage(assets.image`fridgeh`)
+    } else {
+        Fridge.setImage(assets.image`fridge`)
+    }
+})

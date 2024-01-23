@@ -6,7 +6,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite,
     assets.animation`yeah`,
     200,
-    false
+    true
     )
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -82,14 +82,14 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . f f f . . . f f . . . . . 
         `],
     200,
-    false
+    true
     )
 })
 function SpawnCustomers (list: any[]) {
     for (let index = 0; index < list.length; index++) {
         pause(200)
         Customers = sprites.create(list._pickRandom(), SpriteKind.Customer)
-        tiles.placeOnTile(Customers, tiles.getTileLocation(14, 6))
+        tiles.placeOnTile(Customers, tiles.getTileLocation(2, 6))
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -165,7 +165,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . f f . . . f f f . . . 
         `],
     200,
-    false
+    true
     )
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -241,9 +241,10 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . f f f . . . . 
         `],
     200,
-    false
+    true
     )
 })
+let Pmove = false
 let Distance = 0
 let Customers: Sprite = null
 let mySprite: Sprite = null
@@ -392,6 +393,7 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
+tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 6))
 let Fridge = sprites.create(assets.image`fridge`, SpriteKind.Food)
 let Bar = sprites.create(assets.image`Bar`, SpriteKind.Food)
 tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
@@ -493,5 +495,11 @@ game.onUpdate(function () {
         Bar.setImage(assets.image`BarH`)
     } else {
         Bar.setImage(assets.image`Bar`)
+    }
+})
+game.onUpdate(function () {
+    Pmove = controller.left.isPressed() || (controller.up.isPressed() || (controller.right.isPressed() || controller.down.isPressed()))
+    if (!(Pmove)) {
+        animation.stopAnimation(animation.AnimationTypes.All, mySprite)
     }
 })

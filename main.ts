@@ -85,13 +85,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-function SpawnCustomers (list: any[]) {
-    for (let index = 0; index < list.length; index++) {
-        pause(200)
-        Customers = sprites.create(list._pickRandom(), SpriteKind.Customer)
-        tiles.placeOnTile(Customers, tiles.getTileLocation(2, 6))
-    }
-}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -246,10 +239,8 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 let Pmove = false
 let Distance = 0
-let Customers: Sprite = null
 let mySprite: Sprite = null
-let list: Image[] = []
-SpawnCustomers(list)
+let Customers = null
 tiles.setCurrentTilemap(tilemap`Cafe`)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -399,7 +390,7 @@ let Bar = sprites.create(assets.image`Bar`, SpriteKind.Food)
 tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
 tiles.placeOnTile(Bar, tiles.getTileLocation(3, 9))
 let Access = 23
-list = [
+let list = [
 img`
     . . . . f f f f f f . . . . . . 
     . . . f 2 f e e e e f f . . . . 

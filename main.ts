@@ -85,6 +85,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onHitWall(SpriteKind.Customer, function (sprite, location) {
+    pause(15000)
+    Customers.setVelocity(30, 0)
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -161,6 +165,11 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+function doSomething (num: number) {
+    SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
+    Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
+    tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
+}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -239,8 +248,92 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 let Pmove = false
 let Distance = 0
+let SpawnLocation: tiles.Location[] = []
+let Customers: Sprite = null
 let mySprite: Sprite = null
-let Customers = null
+let CustomerImages: Image[] = []
+CustomerImages = [
+img`
+    . . . . f f f f f f . . . . . . 
+    . . . f 2 f e e e e f f . . . . 
+    . . f 2 2 2 f e e e e f f . . . 
+    . . f e e e e f f e e e f . . . 
+    . f e 2 2 2 2 e e f f f f . . . 
+    . f 2 e f f f f 2 2 2 e f . . . 
+    . f f f e e e f f f f f f f . . 
+    . f e e 4 4 f b e 4 4 e f f . . 
+    . . f e d d f 1 4 d 4 e e f . . 
+    . . . f d d d d 4 e e e f . . . 
+    . . . f e 4 4 4 e e f f . . . . 
+    . . . f 2 2 2 e d d 4 . . . . . 
+    . . . f 2 2 2 e d d e . . . . . 
+    . . . f 5 5 4 f e e f . . . . . 
+    . . . . f f f f f f . . . . . . 
+    . . . . . . f f f . . . . . . . 
+    `,
+img`
+    ........................
+    ........................
+    ........................
+    ........................
+    ..........ffff..........
+    ........ff1111ff........
+    .......fb111111bf.......
+    .......f1111111df.......
+    ......fd1111111ddf......
+    ......fd111111dddf......
+    ......fd111ddddddf......
+    ......fd1dfbddddbf......
+    ......fbddfcdbbbcf......
+    .......f11111bbcf.......
+    .......f1b1fffff........
+    .......fbfc111bf........
+    ........ff1b1bff........
+    .........fbfbfff.f......
+    ..........ffffffff......
+    ............fffff.......
+    ........................
+    ........................
+    ........................
+    ........................
+    `,
+img`
+    . . . . . . 5 . 5 . . . . . . . 
+    . . . . . f 5 5 5 f . . . . . . 
+    . . . . f 6 2 5 5 6 f . . . . . 
+    . . . f 6 6 6 6 1 6 6 f . . . . 
+    . . . f 6 6 6 6 6 1 6 f . . . . 
+    . . . f d f d 6 6 6 1 f . . . . 
+    . . . f d f d 6 6 6 6 f f . . . 
+    . . . f d 3 d d 6 6 6 f 6 f . . 
+    . . . . f d d d f f 6 f f . . . 
+    . . . . . f f 5 3 f 6 6 6 f . . 
+    . . . . f 5 3 3 f f f f f . . . 
+    . . . . f 3 3 f d f . . . . . . 
+    . . . . . f 3 f d f . . . . . . 
+    . . . . f 3 5 3 f d f . . . . . 
+    . . . . f f 3 3 f f . . . . . . 
+    . . . . . . f f f . . . . . . . 
+    `,
+img`
+    . . . . f f f f f . . . . . . . 
+    . . . f e e e e e f . . . . . . 
+    . . f d d d d e e e f . . . . . 
+    . c d f d d f d e e f f . . . . 
+    . c d f d d f d e e d d f . . . 
+    c d e e d d d d e e b d c . . . 
+    c d d d d c d d e e b d c . . . 
+    c c c c c d d e e e f c . . . . 
+    . f d d d d e e e f f . . . . . 
+    . . f f f f f e e e e f . . . . 
+    . . . . f f e e e e e e f . f f 
+    . . . f e e f e e f e e f . e f 
+    . . f e e f e e f e e e f . e f 
+    . f b d f d b f b b f e f f e f 
+    . f d d f d d f d d b e f f f f 
+    . . f f f f f f f f f f f f f . 
+    `
+]
 tiles.setCurrentTilemap(tilemap`Cafe`)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -390,88 +483,6 @@ let Bar = sprites.create(assets.image`Bar`, SpriteKind.Food)
 tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
 tiles.placeOnTile(Bar, tiles.getTileLocation(3, 9))
 let Access = 23
-let list = [
-img`
-    . . . . f f f f f f . . . . . . 
-    . . . f 2 f e e e e f f . . . . 
-    . . f 2 2 2 f e e e e f f . . . 
-    . . f e e e e f f e e e f . . . 
-    . f e 2 2 2 2 e e f f f f . . . 
-    . f 2 e f f f f 2 2 2 e f . . . 
-    . f f f e e e f f f f f f f . . 
-    . f e e 4 4 f b e 4 4 e f f . . 
-    . . f e d d f 1 4 d 4 e e f . . 
-    . . . f d d d d 4 e e e f . . . 
-    . . . f e 4 4 4 e e f f . . . . 
-    . . . f 2 2 2 e d d 4 . . . . . 
-    . . . f 2 2 2 e d d e . . . . . 
-    . . . f 5 5 4 f e e f . . . . . 
-    . . . . f f f f f f . . . . . . 
-    . . . . . . f f f . . . . . . . 
-    `,
-img`
-    ........................
-    ........................
-    ........................
-    ........................
-    ..........ffff..........
-    ........ff1111ff........
-    .......fb111111bf.......
-    .......f1111111df.......
-    ......fd1111111ddf......
-    ......fd111111dddf......
-    ......fd111ddddddf......
-    ......fd1dfbddddbf......
-    ......fbddfcdbbbcf......
-    .......f11111bbcf.......
-    .......f1b1fffff........
-    .......fbfc111bf........
-    ........ff1b1bff........
-    .........fbfbfff.f......
-    ..........ffffffff......
-    ............fffff.......
-    ........................
-    ........................
-    ........................
-    ........................
-    `,
-img`
-    . . . . . . 5 . 5 . . . . . . . 
-    . . . . . f 5 5 5 f . . . . . . 
-    . . . . f 6 2 5 5 6 f . . . . . 
-    . . . f 6 6 6 6 1 6 6 f . . . . 
-    . . . f 6 6 6 6 6 1 6 f . . . . 
-    . . . f d f d 6 6 6 1 f . . . . 
-    . . . f d f d 6 6 6 6 f f . . . 
-    . . . f d 3 d d 6 6 6 f 6 f . . 
-    . . . . f d d d f f 6 f f . . . 
-    . . . . . f f 5 3 f 6 6 6 f . . 
-    . . . . f 5 3 3 f f f f f . . . 
-    . . . . f 3 3 f d f . . . . . . 
-    . . . . . f 3 f d f . . . . . . 
-    . . . . f 3 5 3 f d f . . . . . 
-    . . . . f f 3 3 f f . . . . . . 
-    . . . . . . f f f . . . . . . . 
-    `,
-img`
-    . . . . f f f f f . . . . . . . 
-    . . . f e e e e e f . . . . . . 
-    . . f d d d d e e e f . . . . . 
-    . c d f d d f d e e f f . . . . 
-    . c d f d d f d e e d d f . . . 
-    c d e e d d d d e e b d c . . . 
-    c d d d d c d d e e b d c . . . 
-    c c c c c d d e e e f c . . . . 
-    . f d d d d e e e f f . . . . . 
-    . . f f f f f e e e e f . . . . 
-    . . . . f f e e e e e e f . f f 
-    . . . f e e f e e f e e f . e f 
-    . . f e e f e e f e e e f . e f 
-    . f b d f d b f b b f e f f e f 
-    . f d d f d d f d d b e f f f f 
-    . . f f f f f f f f f f f f f . 
-    `
-]
 game.onUpdate(function () {
     Distance = Math.sqrt((mySprite.x - Fridge.x) * (mySprite.x - Fridge.x) + (mySprite.y - Fridge.y) * (mySprite.y - Fridge.y))
     if (Distance <= Access) {
@@ -493,4 +504,8 @@ game.onUpdate(function () {
     if (!(Pmove)) {
         animation.stopAnimation(animation.AnimationTypes.All, mySprite)
     }
+})
+game.onUpdateInterval(15000, function () {
+    doSomething(randint(0, CustomerImages.length))
+    Customers.setVelocity(-20, 0)
 })

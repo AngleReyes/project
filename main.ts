@@ -74,7 +74,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     false
     )
 })
-let Access = 0
+let Distance = 0
 let mySprite: Sprite = null
 tiles.setCurrentTilemap(tilemap`Cafe`)
 scene.setBackgroundImage(img`
@@ -219,8 +219,14 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
-let Fridge: number = sprites.create(assets.image`fridge`, SpriteKind.Player)
+let Fridge = sprites.create(assets.image`fridge`, SpriteKind.Food)
 tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
+let Access = 23
 game.onUpdate(function () {
-    Access = Math.sqrt((Fridge - mySprite) * (Fridge - mySprite) + (Fridge - mySprite) * (Fridge - mySprite))
+    Distance = Math.sqrt((mySprite.x - Fridge.x) * (mySprite.x - Fridge.x) + (mySprite.y - Fridge.y) * (mySprite.y - Fridge.y))
+    if (Distance <= Access) {
+        Fridge.setImage(assets.image`fridgeh`)
+    } else {
+        Fridge.setImage(assets.image`fridge`)
+    }
 })

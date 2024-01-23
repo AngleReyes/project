@@ -87,8 +87,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function SpawnCustomers (list: any[]) {
     for (let index = 0; index < list.length; index++) {
+        pause(200)
         Customers = sprites.create(list._pickRandom(), SpriteKind.Customer)
-        pause(15000)
+        tiles.placeOnTile(Customers, tiles.getTileLocation(14, 6))
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -246,6 +247,8 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 let Distance = 0
 let Customers: Sprite = null
 let mySprite: Sprite = null
+let list: Image[] = []
+SpawnCustomers(list)
 tiles.setCurrentTilemap(tilemap`Cafe`)
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -390,9 +393,11 @@ mySprite = sprites.create(img`
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
 let Fridge = sprites.create(assets.image`fridge`, SpriteKind.Food)
+let Bar = sprites.create(assets.image`Bar`, SpriteKind.Food)
 tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
+tiles.placeOnTile(Bar, tiles.getTileLocation(3, 9))
 let Access = 23
-let list = [
+list = [
 img`
     . . . . f f f f f f . . . . . . 
     . . . f 2 f e e e e f f . . . . 
@@ -480,5 +485,13 @@ game.onUpdate(function () {
         Fridge.setImage(assets.image`fridgeh`)
     } else {
         Fridge.setImage(assets.image`fridge`)
+    }
+})
+game.onUpdate(function () {
+    Distance = Math.sqrt((mySprite.x - Bar.x) * (mySprite.x - Bar.x) + (mySprite.y - Bar.y) * (mySprite.y - Bar.y))
+    if (Distance <= Access) {
+        Bar.setImage(assets.image`BarH`)
+    } else {
+        Bar.setImage(assets.image`Bar`)
     }
 })

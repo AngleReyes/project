@@ -85,10 +85,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-scene.onHitWall(SpriteKind.Customer, function (sprite, location) {
-    pause(15000)
-    Customers.setVelocity(30, 0)
-})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -166,9 +162,12 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 function doSomething (num: number) {
-    SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
-    Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
-    tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
+    for (let index = 0; index < num; index++) {
+        SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
+        Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
+        tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
+        Customers.setVelocity(-20, 0)
+    }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -246,10 +245,10 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-let Pmove = false
 let Distance = 0
-let SpawnLocation: tiles.Location[] = []
+let Pmove = false
 let Customers: Sprite = null
+let SpawnLocation: tiles.Location[] = []
 let mySprite: Sprite = null
 let CustomerImages: Image[] = []
 CustomerImages = [
@@ -484,6 +483,12 @@ tiles.placeOnTile(Fridge, tiles.getTileLocation(0, 10))
 tiles.placeOnTile(Bar, tiles.getTileLocation(3, 9))
 let Access = 23
 game.onUpdate(function () {
+    Pmove = controller.left.isPressed() || (controller.up.isPressed() || (controller.right.isPressed() || controller.down.isPressed()))
+    if (!(Pmove)) {
+        animation.stopAnimation(animation.AnimationTypes.All, mySprite)
+    }
+})
+game.onUpdate(function () {
     Distance = Math.sqrt((mySprite.x - Fridge.x) * (mySprite.x - Fridge.x) + (mySprite.y - Fridge.y) * (mySprite.y - Fridge.y))
     if (Distance <= Access) {
         Fridge.setImage(assets.image`fridgeh`)
@@ -499,13 +504,6 @@ game.onUpdate(function () {
         Bar.setImage(assets.image`Bar`)
     }
 })
-game.onUpdate(function () {
-    Pmove = controller.left.isPressed() || (controller.up.isPressed() || (controller.right.isPressed() || controller.down.isPressed()))
-    if (!(Pmove)) {
-        animation.stopAnimation(animation.AnimationTypes.All, mySprite)
-    }
-})
 game.onUpdateInterval(15000, function () {
     doSomething(randint(0, CustomerImages.length))
-    Customers.setVelocity(-20, 0)
 })

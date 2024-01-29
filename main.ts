@@ -496,9 +496,6 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-	
-})
-game.onUpdate(function () {
     Distance = Math.sqrt((mySprite.x - Fridge.x) * (mySprite.x - Fridge.x) + (mySprite.y - Fridge.y) * (mySprite.y - Fridge.y))
     if (Distance <= Access) {
         Fridge.setImage(assets.image`fridgeh`)

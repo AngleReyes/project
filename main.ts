@@ -85,6 +85,28 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+function SpawnCustomers (num: number) {
+    if (num < CustomerImages.length) {
+        for (let index = 0; index < num; index++) {
+            // This code was provided as starter code by my teacher
+            SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
+            Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
+            tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
+            Customers.setVelocity(randint(-10, -30), 0)
+        }
+    } else if (num == CustomerImages.length) {
+        for (let index = 0; index < num; index++) {
+            // This code was provided as starter code by my teacher
+            SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
+            Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
+            tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
+            Customers.setVelocity(randint(-40, -50), 0)
+        }
+    }
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Customer, function (sprite, otherSprite) {
+    sprites.destroy(Customers)
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -161,23 +183,6 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-function doSomething (num: number) {
-    if (num < CustomerImages.length) {
-        for (let index = 0; index < num; index++) {
-            SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
-            Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
-            tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
-            Customers.setVelocity(randint(-10, -30), 0)
-        }
-    } else if (num == CustomerImages.length) {
-        for (let index = 0; index < num; index++) {
-            SpawnLocation = tiles.getTilesByType(assets.tile`myTile7`)
-            Customers = sprites.create(CustomerImages._pickRandom(), SpriteKind.Customer)
-            tiles.placeOnRandomTile(Customers, assets.tile`myTile7`)
-            Customers.setVelocity(randint(-40, -50), 0)
-        }
-    }
-}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -512,7 +517,7 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(15000, function () {
-    doSomething(randint(0, CustomerImages.length))
+    SpawnCustomers(randint(0, CustomerImages.length))
 })
 game.onUpdateInterval(16000, function () {
     Customers.setVelocity(50, 0)

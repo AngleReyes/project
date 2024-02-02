@@ -105,7 +105,7 @@ function SpawnCustomers (num: number) {
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Customer, function (sprite, otherSprite) {
-    sprites.destroy(Customers)
+    sprites.destroy(otherSprite)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
